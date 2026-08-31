@@ -1,0 +1,8 @@
+# 全 repository 預設由實際 GitHub Team review。
+* @kino-labs/oss-maintainers
+
+# 治理、安全、授權及自動化設定需由 Owner Team review。
+/LICENSE @kino-labs/oss-maintainers
+/SECURITY.md @kino-labs/oss-maintainers
+/GOVERNANCE.md @kino-labs/oss-maintainers
+/.github/ @kino-labs/oss-maintainers

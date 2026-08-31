@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "gate-sandbox",
+    "port": 8080
+  },
+  "tags": [
+    "demo"
+  ]
+}

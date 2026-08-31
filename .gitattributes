@@ -1,0 +1,12 @@
+# 開源 repo 會被 Windows、Linux、macOS 的貢獻者交替編輯，CI 也在 Linux runner 上跑。
+# 統一用 LF：避免整檔假 diff 淹沒 review，也避免 workflow 與 script 帶著 CR
+# 在 runner 上執行失敗。
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary

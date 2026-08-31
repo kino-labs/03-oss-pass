@@ -1,0 +1,38 @@
+name: sbom
+
+# 本專案只用 Python 標準函式庫，沒有第三方相依，所以沒有安裝步驟。
+# 即使如此仍要提交 sbom.cdx.json：讓「沒有相依」是明確聲明，而不是漏檔。
+# 有相依的專案必須先安裝再掃安裝位置，見範本的 .github/workflows/sbom.yml。
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  sbom:
+    name: sbom
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.generated.cdx.json
+          upload-artifact: false
+
+      - name: Compare against the committed SBOM
+        run: python scripts/check_sbom.py sbom.cdx.json sbom.generated.cdx.json
+
+      - name: Upload the regenerated SBOM when it differs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-regenerated
+          path: sbom.generated.cdx.json

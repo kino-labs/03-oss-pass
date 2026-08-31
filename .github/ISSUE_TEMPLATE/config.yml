@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/company/project-name/security/advisories/new
+    about: 請用私密管道通報漏洞、Secret 或個資，不要建立公開 Issue。
+  - name: Support policy
+    url: https://github.com/company/project-name/blob/main/SUPPORT.md
+    about: 建立 Issue 前先確認支援版本與範圍。

@@ -1,0 +1,52 @@
+name: Bug report
+description: 回報可重現且不是安全漏洞的問題
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        安全漏洞、Secret 或個資請勿貼在這裡，請改用 SECURITY.md 的私密通報方式。
+  - type: input
+    id: version
+    attributes:
+      label: 專案版本
+      placeholder: 例如 v2.3.1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 作業系統與執行環境
+      placeholder: 例如 Windows 11 / Python 3.12
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟
+      description: 請提供最小範例，移除 Token、個資、客戶資料及內部網址。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 預期結果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 實際結果與已去敏錯誤訊息
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: 確認
+      options:
+        - label: 我已搜尋現有 Issue。
+          required: true
+        - label: 內容不含 Secret、個資、客戶資料或漏洞利用細節。
+          required: true

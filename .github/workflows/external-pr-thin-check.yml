@@ -1,0 +1,32 @@
+name: external-pr-thin-check
+
+# 僅給沒有公司電腦的外部貢獻者 PR。不含 LLM。
+# 內部 Owner 的 PR 以公司檢核 Agent 回報的 open-source-gate 為準。
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  external-pr-thin-check:
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    name: external-pr-thin-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check required files
+        run: python scripts/check_required_files.py
+      - name: Run gitleaks
+        run: |
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.24.3 detect \
+            --source=/repo \
+            --verbose \
+            --redact \
+            --exit-code=1
